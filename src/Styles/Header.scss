@@ -1,0 +1,30 @@
+@import './Variables';
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 50px;
+  background-color: $secondary;
+  border-radius: 5px;
+  box-shadow: $shadow;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    width: 100px;
+
+    transition: $transition-short;
+    border-bottom: 1px solid $primary;
+    &:hover {
+      border-bottom-color: $highlight;
+    }
+  }
+}
+
+.active {
+  border-bottom-color: $highlight !important;
+}
