@@ -7,16 +7,16 @@ const Table = (props) => {
   return (
     <div className="Table">
       <div className="TableRow TableHeader" style={{borderBottom: '1px solid #1677df', gridTemplateColumns: `repeat(${props.columns}, 1fr)`}}>
-        <div className="left" onClick={() => props.sortCol( "name")}>Name</div>
-        <div className="left" onClick={() => props.sortCol( "exchange")}>Exchange</div>
+        <div className="left" onClick={() => props.sortCol("name")}>Name</div>
+        <div className="left" onClick={() => props.sortCol("exchange")}>Exchange</div>
         <div className="right" onClick={() => props.sortCol("price")}>Price</div>
         <div className="right" onClick={() => props.sortCol("vol")}>24HVolume</div>
         <div className="right" onClick={() => props.sortCol("trades")}>24HTrades</div>
         <div className="right" onClick={() => props.sortCol("rank")}>Rank</div>
       </div>
-      {props.data.length > 0 &&
+      {props.data !== undefined &&
         props.data.map((entry, index) => (
-          <div key={index} className="TableRow" style={{gridTemplateColumns: `repeat(${props.columns}, 1fr)`}} >            
+          <div key={index} className="TableRow" style={{gridTemplateColumns: `repeat(${props.columns}, 1fr)`}} onClick={() => props.watch(entry)}>            
             {<div className="left">{`${entry.baseSymbol} - ${entry.baseId.charAt(0).toUpperCase() + entry.baseId.slice(1)}`}</div>}
             {<div className="left">{entry.exchangeId}</div>}
             {<div className="right">{`$${parseFloat(entry.priceUsd).toFixed(2)}`}</div>}
@@ -30,6 +30,8 @@ const Table = (props) => {
           <button onClick={props.decrementPage}>Prev</button> 
           <button onClick={() => props.setLimit(25)}>25</button>
           <button onClick={() => props.setLimit(50)}>50</button>
+          <button onClick={() => props.setLimit(100)}>100</button>
+          <button onClick={() => props.setLimit(250)}>250</button>
           <button onClick={props.incrementPage}>Next</button>
         </div>
     </div>

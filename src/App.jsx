@@ -13,7 +13,7 @@ import Watchlist from './Components/Watchlist'
 export default class App extends React.Component {
   state = {
     data: [],
-    selected: [],
+    watchlist: [],
     limit: 25,
     offset: 0,
     sortType: ""
@@ -42,12 +42,13 @@ export default class App extends React.Component {
   }
 
   incrementPage = () => {
-    this.setState({offset: this.state.offset + 1 * this.state.limit}, () => this.fetchData())
+    this.setState(prevState => ({offset: prevState.offset + 1 * prevState.limit}), () => this.fetchData())
   }
 
   decrementPage = () => {
     if (this.state.offset > 0)
-      this.setState({offset: this.state.offset - 1 * this.state.limit}, () => this.fetchData())
+      this.setState(prevState => 
+        ({offset: prevState.offset - 1 * prevState.limit}), () => this.fetchData())
   }
 
   setLimit = (size) => {
@@ -56,11 +57,12 @@ export default class App extends React.Component {
 
   sortCol = (col) => {
     this.setState({sortType: col})
-    if (this.state.sortType === col) {
+    if (this.state.sortType === col) 
       this.setState({data: this.state.data.reverse()})
-    } else 
+
+    else 
     // Performance is worse when wrapping the sort in setState, but has more clarity.
-      this.setState({data: this.state.data.sort((a, b) => {
+      this.setState(prevState => ({data: prevState.data.sort((a, b) => {
         switch (col) {
           case "name":
             return a.baseSymbol.localeCompare(b.baseSymbol)
@@ -88,8 +90,15 @@ export default class App extends React.Component {
           default:
             return b.priceUsd - a.priceUsd 
             break;
-        }})})
+        }})}))
     console.log(col);
+  }
+
+  watch = (entry) => {
+    this.setState(prevState => ({
+        watchlist: [...prevState.watchlist, entry]
+      })
+    )
   }
 
   render() {
@@ -100,8 +109,8 @@ export default class App extends React.Component {
   
         <Routes>
           <Route path="/home" element = {<Home />} />
-          <Route path="/crypto" element = {<Crypto data={this.state.data} setLimit={this.setLimit} incrementPage={this.incrementPage} decrementPage={this.decrementPage} sortCol={this.sortCol} /> } />
-          <Route path="/Watchlist" element = {<Watchlist />} />
+          <Route path="/crypto" element = {<Crypto data={this.state.data} setLimit={this.setLimit} incrementPage={this.incrementPage} decrementPage={this.decrementPage} sortCol={this.sortCol} watch={this.watch} /> } />
+          <Route path="/Watchlist" element = {<Watchlist data={this.state.watchlist} />} />
           <Route path="*" element = {<Navigate to='/home' replace />} />
         </Routes>
   

@@ -1,0 +1,9 @@
+The assignment was done with a hard cap of a total of 5 hours of worktime. This was done over the span of three days due to my current job being very busy.
+
+I could have done some things differently, but there was no time to correct those with the cap I had for myself:
+
+- Table rows should have been a separate stateful component, that holds a state of whether it is active or not, which would have helped visually select each one, instead of just adding the data to a different array.
+- Watchlist and Crypto components are pretty much the same, could have used a single component with a different prop to determine which App state to pull data from.
+- The data fetch runs on button clicks, which could have been separated into different methods, so that Watchlist doesn't modify Crypto's data.
+- UI could have been a lot better, but I decided to not put in too much effort into it. Decide to write it from scratch as to not spend time reading framework documentation, considering the time limit.
+- The efficiency of writing code could have been better, 5 hours for this project seems a bit too much, but I did try to refactor whatever I could and use best practices.
