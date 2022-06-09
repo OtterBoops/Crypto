@@ -7,3 +7,4 @@ I could have done some things differently, but there was no time to correct thos
 - The data fetch runs on button clicks, which could have been separated into different methods, so that Watchlist doesn't modify Crypto's data.
 - UI could have been a lot better, but I decided to not put in too much effort into it. Decide to write it from scratch as to not spend time reading framework documentation, considering the time limit.
 - The efficiency of writing code could have been better, 5 hours for this project seems a bit too much, but I did try to refactor whatever I could and use best practices.
+- Local storage could be used, so the data gets preserved after refresh, but I have no knowledge in that area, so I did not attempt it.
